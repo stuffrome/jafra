@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { Restaurant } from '../models/restaurant';
-import { RestaurantService } from '../services/restaurant.service';
-import {Router, ActivatedRoute, NavigationStart, NavigationEnd} from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {Restaurant} from '../models/restaurant';
+import {RestaurantService} from '../services/restaurant.service';
+import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
+import {SortType} from '../enums/sort-type.enum';
 
 @Component({
   selector: 'app-search-result',
@@ -11,8 +12,7 @@ import {Router, ActivatedRoute, NavigationStart, NavigationEnd} from '@angular/r
 export class SearchResultComponent implements OnInit {
 
   restaurants: Restaurant[];
-
-
+  sortType: SortType;
 
   constructor(
     private restaurantService: RestaurantService,
@@ -27,14 +27,36 @@ export class SearchResultComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.sortType = SortType.DISTANCE;
     this.getRestaurants();
   }
 
   getRestaurants() {
     const categories: string = this.route.snapshot.paramMap.get('searchValue');
-    this.restaurantService.findRestaurantsMatching(categories).subscribe(res => {
+    this.restaurantService.findRestaurantsWith(categories).subscribe(res => {
       this.restaurants = res;
+      this.sortRestaurants();
     });
   }
 
+  // Sorting
+
+  sortByName() {
+    this.sortType = SortType.NAME;
+    this.sortRestaurants();
+  }
+
+  sortByPrice() {
+    this.sortType = SortType.PRICE;
+    this.sortRestaurants();
+  }
+
+  sortByDistance() {
+    this.sortType = SortType.DISTANCE;
+    this.sortRestaurants();
+  }
+
+  sortRestaurants() {
+    this.restaurants = this.restaurantService.sortRestaurants(this.restaurants, this.sortType);
+  }
 }

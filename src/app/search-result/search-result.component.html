@@ -1,20 +1,34 @@
-<table class="table">
-  <thead>
-  <tr>
-    <th scope="col">Name</th>
-    <th scope="col">Price</th>
-    <th scope="col">Distance</th>
-    <th scope="col"></th>
-    <th scope="col"></th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let restaurant of restaurants">
-    <td>{{restaurant.name}}</td>
-    <td>{{restaurant.price}}</td>
-    <td>{{restaurant.distance}}</td>
-    <td></td>
-    <td></td>
-  </tr>
-  </tbody>
-</table>
+<p class="d-inline p-2">Sort by:</p>
+<div class="dropdown d-inline">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    {{sortType}}
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="">
+    <a class="dropdown-item" (click)="sortByName()">Name</a>
+    <a class="dropdown-item" (click)="sortByPrice()">Price</a>
+    <a class="dropdown-item" (click)="sortByDistance()">Distance</a>
+  </div>
+</div>
+
+<div class="pt-2">
+  <table class="table">
+    <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Price</th>
+      <th scope="col">Distance</th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let restaurant of restaurants">
+      <td>{{restaurant.name}}</td>
+      <td>{{restaurant.price}}</td>
+      <td>{{restaurant.distance}}</td>
+      <td></td>
+      <td></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
