@@ -1,0 +1,20 @@
+<table class="table">
+  <thead>
+  <tr>
+    <th scope="col">Name</th>
+    <th scope="col">Price</th>
+    <th scope="col">Distance</th>
+    <th scope="col"></th>
+    <th scope="col"></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let restaurant of restaurants">
+    <td>{{restaurant.name}}</td>
+    <td>{{restaurant.price}}</td>
+    <td>{{restaurant.distance}}</td>
+    <td></td>
+    <td></td>
+  </tr>
+  </tbody>
+</table>
