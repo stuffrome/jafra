@@ -1,16 +1,15 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import {LocationService} from '../services/location.service';
+import {SortType} from '../enums/sort-type.enum';
 import {Restaurant} from '../models/restaurant';
 import {RestaurantService} from '../services/restaurant.service';
-import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
-import {SortType} from '../enums/sort-type.enum';
-import {LocationService} from '../services/location.service';
 
 @Component({
-  selector: 'app-search-result',
-  templateUrl: './search-result.component.html',
-  styleUrls: ['./search-result.component.css']
+  selector: 'app-recommendations',
+  templateUrl: './recommendations.component.html',
+  styleUrls: ['./recommendations.component.css']
 })
-export class SearchResultComponent implements OnInit {
+export class RecommendationsComponent implements OnInit {
 
   restaurants: Restaurant[];
   sortType: SortType;
@@ -18,14 +17,8 @@ export class SearchResultComponent implements OnInit {
   constructor(
     private restaurantService: RestaurantService,
     private locationService: LocationService,
-    private router: Router,
-    private route: ActivatedRoute
   ) {
-    this.router.events.subscribe(event => {
-      if (event instanceof NavigationEnd) {
-        this.getRestaurants();
-      }
-    });
+
   }
 
   ngOnInit() {
@@ -33,11 +26,14 @@ export class SearchResultComponent implements OnInit {
   }
 
   getRestaurants() {
-    const term: string = this.route.snapshot.paramMap.get('searchValue');
+    const TEST_USER = 'test';
+    const TEST_PG_SIZE = 10;
+    const TEST_PG_NUM = 1;
 
     this.locationService.getLocation().then(coordinates => {
-      this.restaurantService.findRestaurantsWith(term, coordinates.latitude, coordinates.longitude).subscribe(res => {
-        this.restaurants = res;
+      this.restaurantService.getRecommendedRestaurants(TEST_USER, TEST_PG_SIZE, TEST_PG_NUM, coordinates.latitude, coordinates.longitude)
+        .subscribe(res => {
+          this.restaurants = res.restaurants;
       });
     });
   }
@@ -63,4 +59,5 @@ export class SearchResultComponent implements OnInit {
   sortRestaurants() {
     this.restaurants = this.restaurantService.sortRestaurants(this.restaurants, this.sortType);
   }
+
 }

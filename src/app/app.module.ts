@@ -9,12 +9,16 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { RestaurantService } from './services/restaurant.service';
 import {FormsModule} from '@angular/forms';
 import { SearchResultComponent } from './search-result/search-result.component';
+import { RestaurantDetailsComponent } from './restaurant-details/restaurant-details.component';
+import { RecommendationsComponent } from './recommendations/recommendations.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavigationComponent,
-    SearchResultComponent
+    SearchResultComponent,
+    RestaurantDetailsComponent,
+    RecommendationsComponent
   ],
     imports: [
         BrowserModule,
