@@ -11,6 +11,7 @@ import {FormsModule} from '@angular/forms';
 import { SearchResultComponent } from './search-result/search-result.component';
 import { RestaurantDetailsComponent } from './restaurant-details/restaurant-details.component';
 import { RecommendationsComponent } from './recommendations/recommendations.component';
+import { RatingComponent } from './rating/rating.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { RecommendationsComponent } from './recommendations/recommendations.comp
     NavigationComponent,
     SearchResultComponent,
     RestaurantDetailsComponent,
-    RecommendationsComponent
+    RecommendationsComponent,
+    RatingComponent
   ],
     imports: [
         BrowserModule,
