@@ -21,6 +21,7 @@ export class RatingComponent implements OnInit {
   setRating(rating: number) {
     console.log('Setting rating for ' + this.restaurant.name + ' to ' + rating);
     this.rating = rating;
+    // Backend call to set rating here
   }
 
   ratingClass(index: number): string {

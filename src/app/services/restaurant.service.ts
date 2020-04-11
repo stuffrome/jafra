@@ -10,7 +10,7 @@ import {RecommendedRestaurantResponse} from '../models/backend-response/recommen
 @Injectable()
 export class RestaurantService {
 
-  private restaurantUrl: string;
+  private readonly restaurantUrl: string;
 
   private readonly DEFAULT_LAT = '29.6516';
   private readonly DEFAULT_LONG = '-82.3248';

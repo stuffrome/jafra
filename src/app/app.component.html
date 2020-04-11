@@ -1,4 +1,4 @@
 <div class="container">
-  <app-navigation class="row"></app-navigation>
+  <app-navigation class="row" *ngIf="userLoggedIn()"></app-navigation>
   <router-outlet class="row outlet"></router-outlet>
 </div>

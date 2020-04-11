@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {AuthenticationService} from './services/authentication.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'jafra';
+
+  constructor(private authenticationService: AuthenticationService) {
+  }
+
+  userLoggedIn(): boolean {
+    return this.authenticationService.isLoggedIn();
+  }
 }

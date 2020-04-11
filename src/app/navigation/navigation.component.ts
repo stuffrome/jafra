@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import {AuthenticationService} from '../services/authentication.service';
 
 @Component({
   selector: 'app-navigation',
@@ -8,12 +9,19 @@ import { Router } from '@angular/router';
 })
 export class NavigationComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(
+    private router: Router,
+    private authenticationService: AuthenticationService) { }
 
   ngOnInit() { }
 
   search(input: string) {
     this.router.navigateByUrl('search/' + input);
+  }
+
+  logout() {
+    this.authenticationService.logOut();
+    this.router.navigateByUrl('login');
   }
 
 }

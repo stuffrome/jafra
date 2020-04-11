@@ -3,6 +3,7 @@ import {LocationService} from '../services/location.service';
 import {SortType} from '../enums/sort-type.enum';
 import {Restaurant} from '../models/restaurant';
 import {RestaurantService} from '../services/restaurant.service';
+import {AuthenticationService} from '../services/authentication.service';
 
 @Component({
   selector: 'app-recommendations',
@@ -16,7 +17,7 @@ export class RecommendationsComponent implements OnInit {
 
   constructor(
     private restaurantService: RestaurantService,
-    private locationService: LocationService,
+    private locationService: LocationService
   ) {
 
   }
@@ -26,12 +27,14 @@ export class RecommendationsComponent implements OnInit {
   }
 
   getRestaurants() {
-    const TEST_USER = 'test';
+    const TEST_USER = 'test2';
     const TEST_PG_SIZE = 10;
     const TEST_PG_NUM = 1;
 
+    const user = sessionStorage.getItem('username');
+
     this.locationService.getLocation().then(coordinates => {
-      this.restaurantService.getRecommendedRestaurants(TEST_USER, TEST_PG_SIZE, TEST_PG_NUM, coordinates.latitude, coordinates.longitude)
+      this.restaurantService.getRecommendedRestaurants(user, TEST_PG_SIZE, TEST_PG_NUM, coordinates.latitude, coordinates.longitude)
         .subscribe(res => {
           this.restaurants = res.restaurants;
       });
