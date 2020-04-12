@@ -4,6 +4,7 @@
     {{sortType}}
   </button>
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="">
+    <a class="dropdown-item" (click)="sortByRelevance()">Relevance</a>
     <a class="dropdown-item" (click)="sortByName()">Name</a>
     <a class="dropdown-item" (click)="sortByPrice()">Price</a>
     <a class="dropdown-item" (click)="sortByDistance()">Distance</a>
@@ -17,7 +18,7 @@
       <th scope="col">Name</th>
       <th scope="col">Price</th>
       <th scope="col">Distance</th>
-      <th scope="col"></th>
+      <th scope="col">Rating</th>
       <th scope="col"></th>
     </tr>
     </thead>
@@ -26,7 +27,7 @@
       <td><a routerLink="/details/{{restaurant.id}}">{{restaurant.name}}</a></td>
       <td>{{restaurant.price}}</td>
       <td>{{restaurant.distance}}</td>
-      <td></td>
+      <td><app-rating [restaurant]="restaurant"></app-rating></td>
       <td></td>
     </tr>
     </tbody>

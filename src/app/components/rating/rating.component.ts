@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Restaurant} from '../models/restaurant';
+import {Restaurant} from '../../models/restaurant';
+import {RestaurantService} from '../../services/restaurant.service';
 
 @Component({
   selector: 'app-rating',
@@ -11,17 +12,19 @@ export class RatingComponent implements OnInit {
   @Input() restaurant: Restaurant;
   rating: number;
 
-  constructor() {
-    this.rating = 0;
+  constructor(private restaurantService: RestaurantService) {
   }
 
   ngOnInit() {
+    if (this.restaurant.userRating > 0) {
+      this.rating = this.restaurant.userRating;
+    }
   }
 
   setRating(rating: number) {
     console.log('Setting rating for ' + this.restaurant.name + ' to ' + rating);
     this.rating = rating;
-    // Backend call to set rating here
+    this.restaurantService.addRestaurantReview(this.restaurant.id, rating);
   }
 
   ratingClass(index: number): string {

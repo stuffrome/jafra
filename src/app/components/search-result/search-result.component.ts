@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {Restaurant} from '../models/restaurant';
-import {RestaurantService} from '../services/restaurant.service';
+import {Restaurant} from '../../models/restaurant';
+import {RestaurantService} from '../../services/restaurant.service';
 import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
-import {SortType} from '../enums/sort-type.enum';
-import {LocationService} from '../services/location.service';
+import {SortType} from '../../models/enums/sort-type.enum';
+import {LocationService} from '../../services/location.service';
 
 @Component({
   selector: 'app-search-result',
@@ -26,6 +26,7 @@ export class SearchResultComponent implements OnInit {
         this.getRestaurants();
       }
     });
+    this.sortType = SortType.RELEVANCE;
   }
 
   ngOnInit() {
@@ -44,6 +45,11 @@ export class SearchResultComponent implements OnInit {
 
 
   // Sorting
+
+  sortByRelevance() {
+    this.sortType = SortType.RELEVANCE;
+    this.getRestaurants();
+  }
 
   sortByName() {
     this.sortType = SortType.NAME;
