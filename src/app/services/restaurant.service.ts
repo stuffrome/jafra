@@ -25,12 +25,13 @@ export class RestaurantService {
     this.wishlistUrl = config.backendUrl() + '/wishlist';
   }
 
-  public findRestaurantsWith(term: string, latitude: number, longitude: number): Observable<Restaurant[]> {
+  public findRestaurantsWith(term: string, latitude: number, longitude: number, sortType: SortType): Observable<Restaurant[]> {
     const username = sessionStorage.getItem('username');
 
     let params = new HttpParams()
       .set('username', username)
-      .set('radius', '4000');
+      .set('radius', '4000')
+      .set('sort', sortType.toString());
 
     if (latitude && longitude) {
       params = params

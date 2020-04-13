@@ -37,7 +37,7 @@ export class SearchResultComponent implements OnInit {
     const term: string = this.route.snapshot.paramMap.get('searchValue');
 
     this.locationService.getLocation().then(coordinates => {
-      this.restaurantService.findRestaurantsWith(term, coordinates.latitude, coordinates.longitude).subscribe(res => {
+      this.restaurantService.findRestaurantsWith(term, coordinates.latitude, coordinates.longitude, this.sortType).subscribe(res => {
         this.restaurants = res;
       });
     });
@@ -53,20 +53,21 @@ export class SearchResultComponent implements OnInit {
 
   sortByName() {
     this.sortType = SortType.NAME;
-    this.sortRestaurants();
+    this.getRestaurants();
   }
 
   sortByPrice() {
     this.sortType = SortType.PRICE;
-    this.sortRestaurants();
+    this.getRestaurants();
   }
 
   sortByDistance() {
     this.sortType = SortType.DISTANCE;
-    this.sortRestaurants();
+    this.getRestaurants();
   }
 
-  sortRestaurants() {
-    this.restaurants = this.restaurantService.sortRestaurants(this.restaurants, this.sortType);
+  sortByRating() {
+    this.sortType = SortType.RATING;
+    this.getRestaurants();
   }
 }

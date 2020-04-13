@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 import {AuthenticationService} from '../../services/auth/authentication.service';
 
 @Component({
@@ -13,7 +13,8 @@ export class NavigationComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private authenticationService: AuthenticationService) { }
+    private authenticationService: AuthenticationService) {
+  }
 
   ngOnInit() {
     this.username = sessionStorage.getItem('username');
@@ -29,7 +30,6 @@ export class NavigationComponent implements OnInit {
   }
 
   isActive(url: string): boolean {
-    console.log('Current url: ' + this.router.url + ' Passed url:' + url);
     return this.router.url === url;
   }
 
