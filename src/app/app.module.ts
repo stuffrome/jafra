@@ -20,6 +20,8 @@ import { WishlistButtonComponent } from './components/wishlist/wishlist-button/w
 import { MyReviewsComponent } from './components/my-reviews/my-reviews.component';
 import { DeleteReviewButtonComponent } from './components/my-reviews/delete-review-button/delete-review-button.component';
 import { RegistrationComponent } from './components/registration/registration.component';
+import { YelpHourPipe } from './shared/pipes/yelp-hour.pipe';
+import { YelpDayPipe } from './shared/pipes/yelp-day.pipe';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,9 @@ import { RegistrationComponent } from './components/registration/registration.co
     WishlistButtonComponent,
     MyReviewsComponent,
     DeleteReviewButtonComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    YelpHourPipe,
+    YelpDayPipe
   ],
     imports: [
         BrowserModule,

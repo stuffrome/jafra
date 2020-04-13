@@ -1,6 +1,6 @@
 import {Open} from './open';
 
-export class Hours {
+export class Hour {
   open: Open[];
   hoursType: string;
   isOpenNow: boolean;
