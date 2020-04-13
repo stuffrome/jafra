@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
+import {ConfigurationService} from '../config/configuration.service';
 
 class JWTRequest {
   username: string;
@@ -23,9 +24,10 @@ export class AuthenticationService {
 
   private readonly authenticationUrl: string;
 
-  constructor(private http: HttpClient) {
-    // this.authenticationUrl = 'https://jafra-backend.herokuapp.com/authenticate';
-    this.authenticationUrl = 'http://localhost:8080/authenticate';
+  constructor(
+    private http: HttpClient,
+    private config: ConfigurationService) {
+    this.authenticationUrl = config.backendUrl() + '/authenticate';
   }
 
   authenticate(username: string, password: string): Observable<JWTResponse> {

@@ -8,6 +8,7 @@
     <a class="dropdown-item" (click)="sortByName()">Name</a>
     <a class="dropdown-item" (click)="sortByPrice()">Price</a>
     <a class="dropdown-item" (click)="sortByDistance()">Distance</a>
+    <a class="dropdown-item" (click)="sortByRating()">Rating</a>
   </div>
 </div>
 
@@ -18,17 +19,19 @@
       <th scope="col">Name</th>
       <th scope="col">Price</th>
       <th scope="col">Distance</th>
-      <th scope="col">Rating</th>
-      <th scope="col"></th>
+      <th scope="col">Avg Rating</th>
+      <th scope="col">Your Rating</th>
+      <th scope="col" class="text-center">Add To Wishlist</th>
     </tr>
     </thead>
     <tbody>
     <tr *ngFor="let restaurant of restaurants">
       <td><a routerLink="/details/{{restaurant.id}}">{{restaurant.name}}</a></td>
-      <td>{{restaurant.price}}</td>
-      <td>{{restaurant.distance}}</td>
+      <td>{{restaurant.price ? restaurant.price : '-'}}</td>
+      <td>{{restaurant.distance | number : '1.0-0'}} meters</td>
+      <td><app-rating [fixed]="true" [rating]="restaurant.rating"></app-rating></td>
       <td><app-rating [restaurant]="restaurant"></app-rating></td>
-      <td></td>
+      <td><app-wishlist-button [restaurant]="restaurant"></app-wishlist-button></td>
     </tr>
     </tbody>
   </table>
@@ -36,14 +39,14 @@
   <nav class="d-flex justify-content-center">
     <ul class="pagination">
       <li class="page-item">
-        <a class="page-link" href="#" aria-label="Previous">
+        <a class="page-link" aria-label="Previous" (click)="previousPage()">
           <span aria-hidden="true">&laquo;</span>
           <span class="sr-only">Previous</span>
         </a>
       </li>
       <li class="page-item" *ngFor="let page of [].constructor(pageCount); let i = index"><a class="page-link" (click)="changePage(i+1)">{{i+1}}</a></li>
       <li class="page-item">
-        <a class="page-link" href="#" aria-label="Next">
+        <a class="page-link" aria-label="Next" (click)="nextPage()">
           <span aria-hidden="true">&raquo;</span>
           <span class="sr-only">Next</span>
         </a>

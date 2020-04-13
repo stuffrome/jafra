@@ -1,0 +1,22 @@
+<div class="pt-2">
+  <table class="table">
+    <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Price</th>
+      <th scope="col">Distance</th>
+      <th scope="col">Rating</th>
+      <th scope="col">Your Rating</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let restaurant of restaurants">
+      <td><a routerLink="/details/{{restaurant.id}}">{{restaurant.name}}</a></td>
+      <td>{{restaurant.price ? restaurant.price : '-'}}</td>
+      <td>{{restaurant.distance | number : '1.0-0'}} meters</td>
+      <td><app-rating [fixed]="true" [rating]="restaurant.rating"></app-rating></td>
+      <td><app-rating [restaurant]="restaurant"></app-rating></td>
+    </tr>
+    </tbody>
+  </table>
+</div>

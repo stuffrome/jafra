@@ -10,21 +10,28 @@ import {RestaurantService} from '../../services/restaurant.service';
 export class RatingComponent implements OnInit {
 
   @Input() restaurant: Restaurant;
-  rating: number;
+  @Input() rating: number;
+  @Input() fixed: boolean;
 
   constructor(private restaurantService: RestaurantService) {
   }
 
   ngOnInit() {
-    if (this.restaurant.userRating > 0) {
-      this.rating = this.restaurant.userRating;
+    if (!this.fixed) {
+      if (this.restaurant.userRating > 0) {
+        this.rating = this.restaurant.userRating;
+      }
     }
+
+    this.rating = Math.round(this.rating);
   }
 
   setRating(rating: number) {
-    console.log('Setting rating for ' + this.restaurant.name + ' to ' + rating);
-    this.rating = rating;
-    this.restaurantService.addRestaurantReview(this.restaurant.id, rating);
+    if (!this.fixed) {
+      console.log('Setting rating for ' + this.restaurant.name + ' to ' + rating);
+      this.rating = rating;
+      this.restaurantService.addRestaurantReview(this.restaurant.id, rating);
+    }
   }
 
   ratingClass(index: number): string {
@@ -32,24 +39,28 @@ export class RatingComponent implements OnInit {
 
     if (this.rating >= index) {
       str += 'fas ';
-      switch (this.rating) {
-        case 1:
-          str += 'oneStar';
-          break;
-        case 2:
-          str += 'twoStars';
-          break;
-        case 3:
-          str += 'threeStars';
-          break;
-        case 4:
-          str += 'fourStars';
-          break;
-        case 5:
-          str += 'fiveStars';
-          break;
-        default:
-          break;
+      if (this.fixed) {
+        str += 'fixedRating';
+      } else {
+        switch (this.rating) {
+          case 1:
+            str += 'oneStar';
+            break;
+          case 2:
+            str += 'twoStars';
+            break;
+          case 3:
+            str += 'threeStars';
+            break;
+          case 4:
+            str += 'fourStars';
+            break;
+          case 5:
+            str += 'fiveStars';
+            break;
+          default:
+            break;
+        }
       }
     }
 

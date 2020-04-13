@@ -5,15 +5,21 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NavigationComponent } from './navigation/navigation.component';
+import { NavigationComponent } from './components/navigation/navigation.component';
 import { RestaurantService } from './services/restaurant.service';
 import {FormsModule} from '@angular/forms';
-import { SearchResultComponent } from './search-result/search-result.component';
-import { RestaurantDetailsComponent } from './restaurant-details/restaurant-details.component';
-import { RecommendationsComponent } from './recommendations/recommendations.component';
-import { RatingComponent } from './rating/rating.component';
-import {AuthHttpInterceptorService} from './services/auth-http-interceptor.service';
-import { LoginComponent } from './login/login.component';
+import { SearchResultComponent } from './components/search-result/search-result.component';
+import { RestaurantDetailsComponent } from './components/restaurant-details/restaurant-details.component';
+import { RecommendationsComponent } from './components/recommendations/recommendations.component';
+import { RatingComponent } from './components/rating/rating.component';
+import {AuthHttpInterceptorService} from './services/auth/auth-http-interceptor.service';
+import { LoginComponent } from './components/login/login.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { WishlistComponent } from './components/wishlist/wishlist.component';
+import { WishlistButtonComponent } from './components/wishlist/wishlist-button/wishlist-button.component';
+import { MyReviewsComponent } from './components/my-reviews/my-reviews.component';
+import { DeleteReviewButtonComponent } from './components/my-reviews/delete-review-button/delete-review-button.component';
+import { RegistrationComponent } from './components/registration/registration.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +29,13 @@ import { LoginComponent } from './login/login.component';
     RestaurantDetailsComponent,
     RecommendationsComponent,
     RatingComponent,
-    LoginComponent
+    LoginComponent,
+    PageNotFoundComponent,
+    WishlistComponent,
+    WishlistButtonComponent,
+    MyReviewsComponent,
+    DeleteReviewButtonComponent,
+    RegistrationComponent
   ],
     imports: [
         BrowserModule,

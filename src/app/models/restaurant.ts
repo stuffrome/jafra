@@ -1,5 +1,5 @@
 import { Category } from './category';
-import {Price} from '../enums/price.enum';
+import {Price} from './enums/price.enum';
 
 export class Restaurant {
   id: string;
@@ -12,4 +12,8 @@ export class Restaurant {
   rating: number;
   price: Price;
   distance: number;
+  userRating: number;
+  userReviewDate: Date;
+  wishList: boolean;
+  visited: boolean;
 }

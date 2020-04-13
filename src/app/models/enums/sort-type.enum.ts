@@ -1,5 +1,8 @@
 export enum SortType {
-  NAME = 'Name',
-  PRICE = 'Price',
-  DISTANCE = 'Distance',
+  RELEVANCE = 'RELEVANCE',
+  RECOMMENDED = 'RECOMMENDED',
+  NAME = 'NAME',
+  PRICE = 'PRICE',
+  DISTANCE = 'DISTANCE',
+  RATING = 'RATING'
 }

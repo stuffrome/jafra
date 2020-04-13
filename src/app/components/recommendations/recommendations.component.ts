@@ -35,10 +35,11 @@ export class RecommendationsComponent implements OnInit {
 
   getRestaurants() {
     this.locationService.getLocation().then(coordinates => {
-      this.restaurantService.getRecommendedRestaurants(this.PAGE_SIZE, this.currentPage, coordinates.latitude, coordinates.longitude)
-        .subscribe(res => {
-          this.restaurants = res.restaurants;
-          this.pageCount = 1 + Math.floor(res.numResults / this.PAGE_SIZE);
+      this.restaurantService
+        .getRecommendedRestaurants(this.PAGE_SIZE, this.currentPage, coordinates.latitude, coordinates.longitude, this.sortType)
+          .subscribe(res => {
+            this.restaurants = res.restaurants;
+            this.pageCount = 1 + Math.floor(res.numResults / this.PAGE_SIZE);
       });
     });
   }
@@ -71,21 +72,21 @@ export class RecommendationsComponent implements OnInit {
 
   sortByName() {
     this.sortType = SortType.NAME;
-    this.sortRestaurants();
+    this.getRestaurants();
   }
 
   sortByPrice() {
     this.sortType = SortType.PRICE;
-    this.sortRestaurants();
+    this.getRestaurants();
   }
 
   sortByDistance() {
     this.sortType = SortType.DISTANCE;
-    this.sortRestaurants();
+    this.getRestaurants();
   }
 
-  sortRestaurants() {
-    this.restaurants = this.restaurantService.sortRestaurants(this.restaurants, this.sortType);
+  sortByRating() {
+    this.sortType = SortType.RATING;
+    this.getRestaurants();
   }
-
 }

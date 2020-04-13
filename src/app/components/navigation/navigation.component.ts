@@ -9,11 +9,15 @@ import {AuthenticationService} from '../../services/auth/authentication.service'
 })
 export class NavigationComponent implements OnInit {
 
+  username: string;
+
   constructor(
     private router: Router,
     private authenticationService: AuthenticationService) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.username = sessionStorage.getItem('username');
+  }
 
   search(input: string) {
     this.router.navigateByUrl('search/' + input);
@@ -22,6 +26,11 @@ export class NavigationComponent implements OnInit {
   logout() {
     this.authenticationService.logOut();
     this.router.navigateByUrl('login');
+  }
+
+  isActive(url: string): boolean {
+    console.log('Current url: ' + this.router.url + ' Passed url:' + url);
+    return this.router.url === url;
   }
 
 }
