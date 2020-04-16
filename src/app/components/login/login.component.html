@@ -1,14 +1,17 @@
 <div class="login-container text-center text-muted" >
   <form class="form-signin" (ngSubmit)="signIn(username.value, password.value)">
     <img class="mb-4" src="assets/images/Full_Logo.png" width="auto" height="250">
-    <input #username type="text" class="form-control" placeholder="Username" required autofocus>
+    <div [hidden]="!failedLogin" class="alert alert-danger" role="alert">
+        Invalid username/password
+    </div>
+    <input #username type="email" class="form-control" placeholder="Username" required autofocus>
     <input #password type="password" class="form-control" placeholder="Password" required>
     <div class="checkbox mb-3">
       <label>
         <input type="checkbox" value="remember-me"> Remember me
       </label>
     </div>
-    <button class="btn btn-lg btn-danger btn-block" type="submit">Sign in</button>
+    <button class="btn btn-lg btn-danger btn-block" type="submit">{{signInBtnText}}</button>
     <div>
       <label>
         Not registered? <a href="/register">Create an account</a>

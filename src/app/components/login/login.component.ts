@@ -9,20 +9,30 @@ import {Router} from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  username: string;
-  email: string;
-  password: string;
-  confirmPassword: string;
+  private readonly DEFAULT_SIGNIN_TEXT = 'SIGN IN';
+
+  private signInBtnText: string;
+  private failedLogin: boolean;
 
   constructor(
     private router: Router,
     private authenticationService: AuthenticationService) {
+    this.signInBtnText = this.DEFAULT_SIGNIN_TEXT;
+    this.failedLogin = false;
   }
 
   ngOnInit() {
+    this.loggedInCheck();
+  }
+
+  loggedInCheck() {
+    if (this.authenticationService.isLoggedIn()) {
+      this.router.navigateByUrl('recommendations');
+    }
   }
 
   signIn(username: string, password: string) {
+    this.signInBtnText = 'SIGNING IN...';
     this.authenticationService.authenticate(username, password).subscribe(res => {
       if (res.token) {
         sessionStorage.setItem('username', username);
@@ -30,6 +40,9 @@ export class LoginComponent implements OnInit {
 
         this.router.navigateByUrl('recommendations');
       }
+    }, err => {
+      this.signInBtnText = this.DEFAULT_SIGNIN_TEXT;
+      this.failedLogin = true;
     });
   }
 

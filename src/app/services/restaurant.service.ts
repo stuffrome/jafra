@@ -51,7 +51,10 @@ export class RestaurantService {
   }
 
   public getRestaurantDetails(id: string): Observable<RestaurantDetails> {
+    const username = sessionStorage.getItem('username');
+
     const params = new HttpParams()
+      .set('username', username)
       .set('id', id);
 
     return this.http.get<RestaurantDetails>(this.restaurantUrl + '/details', {params});
