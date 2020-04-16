@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {ConfigurationService} from './config/configuration.service';
+import {Observable} from 'rxjs';
 
 class UserAccountRequest {
   username: string;
@@ -27,9 +28,9 @@ export class UserService {
     this.userUrl = config.backendUrl() + '/users';
   }
 
-  public createUser(username: string, email: string, password: string) {
+  public createUser(username: string, email: string, password: string): Observable<any> {
     const newUserAccount = new UserAccountRequest(username, email, password);
 
-    this.http.post(this.userUrl + '/create', newUserAccount).subscribe();
+    return this.http.post(this.userUrl + '/create', newUserAccount);
   }
 }

@@ -2,6 +2,9 @@
   <form (ngSubmit)="register(username.value, email.value, password.value, passwordConfirm.value)">
     <h1>Register</h1>
     <p>Start on a food adventure like no other!</p>
+    <div [hidden]="!failedRegistration" class="alert alert-danger" role="alert">
+      {{errorMessage}}
+    </div>
     <hr>
     <div class="form-group">
       <div class="input-group">
@@ -22,6 +25,7 @@
       <div class="input-group">
         <input #passwordConfirm type="password" class="form-control" name="confirm_password" placeholder="Confirm Password" required="required">
       </div>
+      <label [hidden]="password.value === passwordConfirm.value" class="form-text text-danger">Passwords do not match</label>
     </div>
     <div class="form-group">
       <label class="checkbox-inline"><input type="checkbox" required="required"> I accept the <a href="#">Terms of Use</a> &amp; <a href="#">Privacy Policy</a></label>
