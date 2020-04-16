@@ -11,8 +11,8 @@ export class LoginComponent implements OnInit {
 
   private readonly DEFAULT_SIGNIN_TEXT = 'SIGN IN';
 
-  private signInBtnText: string;
-  private failedLogin: boolean;
+  signInBtnText: string;
+  failedLogin: boolean;
 
   constructor(
     private router: Router,
