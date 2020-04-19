@@ -13,6 +13,8 @@ export class RecommendationsComponent implements OnInit {
 
   restaurants: Restaurant[];
   sortType: SortType;
+  searching: boolean;
+  message: string;
 
   readonly PAGE_SIZE = 10;
   currentPage: number;
@@ -25,6 +27,7 @@ export class RecommendationsComponent implements OnInit {
     private restaurantService: RestaurantService,
     private locationService: LocationService
   ) {
+    this.searching = false;
     this.sortType = SortType.RECOMMENDED;
     this.currentPage = 1;
   }
@@ -34,13 +37,19 @@ export class RecommendationsComponent implements OnInit {
   }
 
   getRestaurants() {
+    this.searching = true;
+    this.message = 'Retrieving search results...';
+
     this.locationService.getLocation().then(coordinates => {
       this.restaurantService
         .getRecommendedRestaurants(this.PAGE_SIZE, this.currentPage, coordinates.latitude, coordinates.longitude, this.sortType)
           .subscribe(res => {
             this.restaurants = res.restaurants;
             this.pageCount = 1 + Math.floor(res.numResults / this.PAGE_SIZE);
-      });
+            this.searching = false;
+          }, err => {
+            this.message = 'Something went wrong. Could not retrieve recommendations.';
+          });
     });
   }
 

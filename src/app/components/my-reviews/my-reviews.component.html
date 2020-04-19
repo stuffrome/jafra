@@ -1,5 +1,5 @@
 <div class="pt-2">
-  <table class="table">
+  <table [hidden]="restaurants.length === 0" class="table">
     <thead>
     <tr>
       <th scope="col">Name</th>
@@ -19,4 +19,10 @@
     </tr>
     </tbody>
   </table>
+  <div class="text-center mt-3">
+    <label [hidden]="!noRestaurants" class="text-muted">
+      <p>You have no reviews!</p>
+      <p>Search for restaurants you've visited before or try a recommended one.</p>
+    </label>
+  </div>
 </div>

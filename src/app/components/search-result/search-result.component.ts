@@ -14,6 +14,8 @@ export class SearchResultComponent implements OnInit {
 
   restaurants: Restaurant[];
   sortType: SortType;
+  searching: boolean;
+  message: string;
 
   constructor(
     private restaurantService: RestaurantService,
@@ -26,6 +28,7 @@ export class SearchResultComponent implements OnInit {
         this.getRestaurants();
       }
     });
+    this.searching = false;
     this.sortType = SortType.RELEVANCE;
   }
 
@@ -34,11 +37,16 @@ export class SearchResultComponent implements OnInit {
   }
 
   getRestaurants() {
+    this.searching = true;
+    this.message = 'Retrieving search results...';
     const term: string = this.route.snapshot.paramMap.get('searchValue');
 
     this.locationService.getLocation().then(coordinates => {
       this.restaurantService.findRestaurantsWith(term, coordinates.latitude, coordinates.longitude, this.sortType).subscribe(res => {
         this.restaurants = res;
+        this.searching = false;
+      }, err => {
+        this.message = 'No results found for \'' + term + '\'';
       });
     });
   }

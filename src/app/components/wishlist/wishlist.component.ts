@@ -12,11 +12,14 @@ import {LocationService} from '../../services/location.service';
 export class WishlistComponent implements OnInit {
 
   restaurants: Restaurant[];
+  noRestaurants: boolean;
 
   constructor(
     private restaurantService: RestaurantService,
     private locationService: LocationService
   ) {
+    this.restaurants = [];
+    this.noRestaurants = false;
   }
 
   ngOnInit() {
@@ -28,6 +31,11 @@ export class WishlistComponent implements OnInit {
       this.restaurantService.getWishlistRestaurants()
         .subscribe(res => {
           this.restaurants = res;
+          if (this.restaurants.length === 0) {
+            this.noRestaurants = true;
+          } else {
+            this.noRestaurants = false;
+          }
         });
     });
   }
