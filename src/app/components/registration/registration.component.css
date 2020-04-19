@@ -46,11 +46,6 @@
   text-decoration: none;
 }
 
-.signup-form form a {
-  color: #19aa8d;
-  text-decoration: none;
-}
-
 .signup-form form a:hover {
   text-decoration: underline;
 }
