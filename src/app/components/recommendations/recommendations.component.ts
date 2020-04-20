@@ -38,7 +38,7 @@ export class RecommendationsComponent implements OnInit {
 
   getRestaurants() {
     this.searching = true;
-    this.message = 'Retrieving search results...';
+    this.message = 'Retrieving your recommendations...';
 
     this.locationService.getLocation().then(coordinates => {
       this.restaurantService
